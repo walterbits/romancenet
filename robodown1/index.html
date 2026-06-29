@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robô Sedutor | Oferta Especial</title>
+  <meta name="description" content="Oferta especial de downsell do Robô Sedutor por apenas R$29." />
+
+  <style>
+    :root {
+      --bg: #07090a;
+      --text: #ffffff;
+      --muted: #d7d7df;
+      --red: #ff173d;
+      --red-dark: #b5001e;
+      --green: #39ff56;
+      --green-dark: #0dcc36;
+      --yellow: #e9ff24;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.58);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 76%, rgba(85, 62, 180, 0.32), transparent 28rem),
+        radial-gradient(circle at 28% 58%, rgba(20, 45, 80, 0.34), transparent 24rem),
+        linear-gradient(180deg, #07090a 0%, #0a0c0d 47%, #050606 100%);
+      overflow-x: hidden;
+      line-height: 1.25;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      width: min(100% - 28px, var(--max));
+      margin: 0 auto;
+      padding: clamp(20px, 3.2vw, 38px) 0 64px;
+      text-align: center;
+    }
+
+    .top-warning {
+      width: 100%;
+      min-height: clamp(48px, 7vw, 74px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      background: linear-gradient(180deg, #ff173d 0%, #c80022 100%);
+      color: #ffffff;
+      text-align: center;
+      font-size: clamp(18px, 3.2vw, 34px);
+      line-height: 1.08;
+      font-weight: 1000;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 32px rgba(255, 23, 61, 0.25);
+    }
+
+    .question {
+      max-width: 960px;
+      margin: clamp(14px, 3vw, 26px) auto 10px;
+      color: var(--yellow);
+      font-size: clamp(22px, 3.4vw, 34px);
+      line-height: 1.05;
+      font-weight: 950;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .offer-line {
+      max-width: 1080px;
+      margin: 0 auto 22px;
+      color: #f7f7f7;
+      font-size: clamp(24px, 4vw, 42px);
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: -0.045em;
+    }
+
+    .old-price {
+      color: #ffffff;
+      text-decoration: line-through;
+      text-decoration-thickness: 4px;
+      text-decoration-color: var(--red);
+    }
+
+    .new-price {
+      color: var(--green);
+      text-shadow: 0 0 18px rgba(57, 255, 86, 0.24);
+      white-space: nowrap;
+    }
+
+    .main-visual {
+      width: min(100%, 586px);
+      margin: 18px auto 26px;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .main-visual img {
+      width: 100%;
+      height: auto;
+    }
+
+    .logo {
+      width: min(52vw, 220px);
+      margin: 8px auto 18px;
+    }
+
+    .logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    .urgency-text {
+      max-width: 980px;
+      margin: 0 auto 22px;
+      color: #f7f7f7;
+      font-size: clamp(23px, 3.8vw, 37px);
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+    }
+
+    .urgency-text .green {
+      color: var(--green);
+      text-transform: uppercase;
+      text-shadow: 0 0 16px rgba(57, 255, 86, 0.25);
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min(100%, 1120px);
+      min-height: clamp(54px, 8vw, 76px);
+      margin: 0 auto;
+      padding: 17px 22px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #4df766 0%, #32dd4c 100%);
+      color: #ffffff;
+      font-size: clamp(18px, 2.4vw, 27px);
+      line-height: 1.05;
+      font-weight: 1000;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 0 #13952a, 0 20px 48px rgba(57, 255, 86, 0.2);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(3px);
+      box-shadow: 0 7px 0 #13952a, 0 16px 38px rgba(57, 255, 86, 0.24);
+      filter: brightness(1.03);
+    }
+
+    .cta:active {
+      transform: translateY(8px);
+      box-shadow: 0 3px 0 #13952a, 0 10px 28px rgba(57, 255, 86, 0.18);
+    }
+
+    .decline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 0;
+      min-width: 180px;
+      min-height: 48px;
+      padding: 12px 28px;
+      border: 2px solid var(--red);
+      border-radius: 10px;
+      color: var(--red);
+      background: transparent;
+      font-size: clamp(14px, 2vw, 17px);
+      font-weight: 800;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .decline:hover {
+      background: rgba(255, 23, 61, 0.1);
+      color: #ff4f6b;
+    }
+
+    .security {
+      width: min(100%, 650px);
+      margin: 56px auto 0;
+      overflow: hidden;
+    }
+
+    .security img {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 22px, var(--max));
+        padding-bottom: 46px;
+      }
+
+      .top-warning {
+        min-height: 54px;
+        padding: 11px 12px;
+        font-size: clamp(17px, 5.2vw, 25px);
+      }
+
+      .question {
+        margin-top: 18px;
+      }
+
+      .offer-line {
+        margin-bottom: 16px;
+      }
+
+      .main-visual {
+        margin-top: 14px;
+        margin-bottom: 22px;
+      }
+
+      .logo {
+        width: min(58vw, 185px);
+      }
+
+      .decline {
+        margin-top: 26px;
+      }
+
+      .security {
+        margin-top: 42px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+  <div class="top-warning">⚠️ ANTES DE IR — Eu tenho um presente pra você!</div>
+
+  <main class="page">
+
+    <h1 class="question">Quantas mulheres você já perdeu por não saber o que mandar na hora certa?</h1>
+
+    <p class="offer-line">
+      O Robô Sedutor lê a conversa e te diz exatamente o que responder.
+      De <span class="old-price">R$67</span> por <span class="new-price">apenas R$47</span> —
+      <span class="new-price">só nesta página, só agora!</span>
+    </p>
+
+    <div class="main-visual">
+      <img src="./img/n1.png" alt="Robô Sedutor analisando conversa e sugerindo resposta" width="586" height="916" loading="eager" />
+      
+    </div>
+
+        <div class="logo">
+      <img src="./img/n2.png" alt="Robô Sedutor" width="275" height="90" loading="lazy" />
+    </div>
+
+    <p class="urgency-text">
+      <span class="green">AGORA MESMO</span> você pode mandar uma mensagem e saber
+      <span class="green">EXATAMENTE</span> o que dizer. Não em uma semana, não em um mês.
+      Agora! E por menos do que você gasta num almoço.
+    </p>
+
+    <!-- BOTÃO PAYT DO DOWNSELL: troque o href abaixo pelo link do checkout Payt de R$47 -->
+        <a class="cta" href="#" payt_action="oneclick_buy" data-object="RKDP84-4MJJ7A">
+            Obter acesso agora
+        </a>
+
+    <!-- LINK DE SAÍDA: coloque aqui a página final, obrigado, ou recusa definitiva -->
+    <a class="decline" href="https://romancenet.site/robodown2" data-preserve-params="true">
+      Prefiro ficar sozinho
+    </a>
+
+    <div class="security">
+      <img src="./img/n3.png" alt="Robô Sedutor analisando conversa e sugerindo resposta" width="586" height="916" loading="eager" />
+    </div>
+  </main>
+
+  <script>
+    /*
+      Mantém UTMs e parâmetros da URL no checkout e no link de saída.
+      Exemplo: ?utm_source=email&origem=whatsapp
+    */
+    (function preserveUrlParams() {
+      const currentParams = new URLSearchParams(window.location.search);
+      if (!currentParams.toString()) return;
+
+      document.querySelectorAll('[data-preserve-params="true"]').forEach(function(link) {
+        try {
+          const url = new URL(link.href);
+          currentParams.forEach(function(value, key) {
+            if (!url.searchParams.has(key)) {
+              url.searchParams.set(key, value);
+            }
+          });
+          link.href = url.toString();
+        } catch (error) {}
+      });
+    })();
+  </script>
+
+  <!-- Script da Payt — cole UMA VEZ antes do </body> da página -->
+<script type="text/javascript" src="https://checkout.payt.com.br/multiple-oneclickbuyscript/L9JGNR.js"></script>
+</body>
+</html>
