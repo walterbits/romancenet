@@ -423,8 +423,6 @@
     }
   </style>
 </head>
-<!-- Script da Payt — cole UMA VEZ antes do </body> da página -->
-<script type="text/javascript" src="https://checkout.payt.com.br/multiple-oneclickbuyscript/L9JGNR.js"></script>
 
 <body>
   <main class="page">
@@ -526,7 +524,7 @@
         </div>
         <p></p>
         <!-- LINK DE RECUSA/DOWNSELL: cole aqui a página para quem não deseja essa oferta. -->
-        <a class="decline-link" href="https://romancenet.site/robodown1">
+        <a class="decline-link" href="https://romancenet.site/robodown1" data-preserve-params="true">
           Não Desejo Essa Oferta
         </a>
 
@@ -541,5 +539,29 @@
       </div>
     </section>
   </main>
+  <!-- Select de parcelas escondido — upsell cobra 1x (default).
+     Para deixar o comprador escolher, marque "Permitir... parcelas" no editor. -->
+<select payt_element="installment" data-object="RD9MJL-4MJJ7A" style="display:none"></select>
+  <!-- Script da Payt — cole UMA VEZ antes do </body> da página -->
+<script type="text/javascript" src="https://checkout.payt.com.br/multiple-oneclickbuyscript/L9JGNR.js"></script>
+
+  <script>
+  (function preserveUrlParams() {
+    const currentParams = new URLSearchParams(window.location.search);
+    if (!currentParams.toString()) return;
+
+    document.querySelectorAll('[data-preserve-params="true"]').forEach(function(link) {
+      try {
+        const url = new URL(link.href);
+        currentParams.forEach(function(value, key) {
+          if (!url.searchParams.has(key)) {
+            url.searchParams.set(key, value);
+          }
+        });
+        link.href = url.toString();
+      } catch (error) {}
+    });
+  })();
+</script>
 </body>
 </html>
