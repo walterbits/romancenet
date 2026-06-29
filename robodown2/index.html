@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robô Sedutor | Última Oferta</title>
+  <meta name="description" content="Última oferta disponível do Robô Sedutor por apenas R$19." />
+
+  <style>
+    :root {
+      --bg: #07090a;
+      --text: #ffffff;
+      --muted: #d7d7df;
+      --red: #ff173d;
+      --red-dark: #c80022;
+      --green: #39ff56;
+      --green-dark: #13952a;
+      --yellow: #e9ff24;
+      --border: rgba(255, 255, 255, 0.12);
+      --shadow: 0 26px 90px rgba(0, 0, 0, 0.58);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 76%, rgba(85, 62, 180, 0.32), transparent 28rem),
+        radial-gradient(circle at 28% 58%, rgba(20, 45, 80, 0.34), transparent 24rem),
+        linear-gradient(180deg, #07090a 0%, #0a0c0d 47%, #050606 100%);
+      overflow-x: hidden;
+      line-height: 1.25;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .top-warning {
+      width: 100%;
+      min-height: clamp(48px, 7vw, 74px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      background: linear-gradient(180deg, #ff173d 0%, #c80022 100%);
+      color: #ffffff;
+      text-align: center;
+      font-size: clamp(18px, 3.2vw, 34px);
+      line-height: 1.08;
+      font-weight: 1000;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 32px rgba(255, 23, 61, 0.25);
+    }
+
+    .page {
+      width: min(100% - 28px, var(--max));
+      margin: 0 auto;
+      padding: clamp(20px, 3.2vw, 38px) 0 64px;
+      text-align: center;
+    }
+
+    .headline {
+      max-width: 1050px;
+      margin: 0 auto 18px;
+      color: #ffffff;
+      font-size: clamp(26px, 4.7vw, 58px);
+      line-height: 1.02;
+      font-weight: 1000;
+      letter-spacing: -0.055em;
+    }
+
+    .headline .green {
+      color: var(--green);
+      text-shadow: 0 0 20px rgba(57, 255, 86, 0.25);
+    }
+
+    .offer-line {
+      max-width: 980px;
+      margin: 0 auto 22px;
+      color: #f5f5f5;
+      font-size: clamp(22px, 3.8vw, 40px);
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: -0.045em;
+    }
+
+    .old-price {
+      color: #ffffff;
+      text-decoration: line-through;
+      text-decoration-thickness: 4px;
+      text-decoration-color: var(--red);
+    }
+
+    .new-price {
+      color: var(--green);
+      text-shadow: 0 0 18px rgba(57, 255, 86, 0.24);
+      white-space: nowrap;
+    }
+
+    .main-visual {
+      width: min(100%, 703px);
+      margin: 18px auto 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .main-visual img {
+      width: 100%;
+      height: auto;
+    }
+
+    .logo {
+      width: min(52vw, 220px);
+      margin: 8px auto 18px;
+    }
+
+    .logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    .pain-text {
+      max-width: 1040px;
+      margin: 0 auto 24px;
+      color: #ffffff;
+      font-size: clamp(24px, 4.1vw, 44px);
+      line-height: 1.08;
+      font-weight: 1000;
+      letter-spacing: -0.05em;
+    }
+
+    .pain-text .expensive {
+      color: var(--green);
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(57, 255, 86, 0.25);
+    }
+
+    .pain-text .red {
+      color: var(--red);
+      text-shadow: 0 0 18px rgba(255, 23, 61, 0.22);
+    }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: min(100%, 1120px);
+      min-height: clamp(54px, 8vw, 76px);
+      margin: 0 auto;
+      padding: 17px 22px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #4df766 0%, #32dd4c 100%);
+      color: #ffffff;
+      font-size: clamp(18px, 2.4vw, 27px);
+      line-height: 1.05;
+      font-weight: 1000;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 0 var(--green-dark), 0 20px 48px rgba(57, 255, 86, 0.2);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(3px);
+      box-shadow: 0 7px 0 var(--green-dark), 0 16px 38px rgba(57, 255, 86, 0.24);
+      filter: brightness(1.03);
+    }
+
+    .cta:active {
+      transform: translateY(8px);
+      box-shadow: 0 3px 0 var(--green-dark), 0 10px 28px rgba(57, 255, 86, 0.18);
+    }
+
+    .decline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 0;
+      min-width: 180px;
+      min-height: 48px;
+      padding: 12px 28px;
+      border: 2px solid var(--red);
+      border-radius: 10px;
+      color: var(--red);
+      background: transparent;
+      font-size: clamp(14px, 2vw, 17px);
+      font-weight: 800;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .decline:hover {
+      background: rgba(255, 23, 61, 0.1);
+      color: #ff4f6b;
+    }
+
+    .security-note {
+      width: fit-content;
+      max-width: 100%;
+      margin: 34px auto 0;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      color: #dfffe7;
+      background: rgba(57, 255, 86, 0.08);
+      font-size: clamp(14px, 2vw, 17px);
+      font-weight: 850;
+    }
+
+    .security-image {
+      width: min(100%, 650px);
+      margin: 26px auto 0;
+      overflow: hidden;
+    }
+
+    .security-image img {
+      width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 640px) {
+      .top-warning {
+        min-height: 54px;
+        padding: 11px 12px;
+        font-size: clamp(17px, 5.2vw, 25px);
+      }
+
+      .page {
+        width: min(100% - 22px, var(--max));
+        padding-bottom: 46px;
+      }
+
+      .headline {
+        font-size: clamp(27px, 8.4vw, 41px);
+      }
+
+      .offer-line {
+        margin-bottom: 16px;
+      }
+
+      .main-visual {
+        margin-top: 14px;
+        margin-bottom: 22px;
+      }
+
+      .logo {
+        width: min(58vw, 185px);
+      }
+
+      .pain-text {
+        font-size: clamp(24px, 7.5vw, 38px);
+      }
+
+      .decline {
+        margin-top: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-warning">⚠️ ÚLTIMA OFERTA DISPONÍVEL</div>
+
+  <main class="page">
+    <h1 class="headline">
+      Ela está online agora, tira print e manda para o robô,
+      <span class="green">ele vai te dizer o que responder!</span>
+    </h1>
+
+    <p class="offer-line">
+      Esta é a sua última oportunidade, acesso completo ao robô de
+      <span class="old-price">R$29</span> por <span class="new-price">apenas R$19!</span>
+    </p>
+
+    <div class="main-visual">
+      <!-- Se quiser usar PNG local, troque este src por ./img/bg2-dw-703x1024.png -->
+      <img src="./img/n1.png" alt="Robô Sedutor mostrando o que responder" width="703" height="1024" loading="eager" />
+    </div>
+
+        <div class="logo">
+      <img src="./img/n2.png" alt="Robô Sedutor" width="275" height="90" loading="lazy" />
+    </div>
+
+    <p class="pain-text">
+      R$19 não é nada. Nada. O que <span class="expensive">custa caro</span> é mandar mensagem,
+      ficar no vácuo e não saber o que fez de errado.
+      <span class="red">Isso tá te custando mulheres todos os dias!</span>
+    </p>
+
+    <!-- BOTÃO PAYT ONE CLICK: objeto 4ZNJ74-4MJJ7A -->
+    <a class="cta" href="#" payt_action="oneclick_buy" data-object="4ZNJ74-4MJJ7A">
+      Acessar o Robô por R$19 agora!
+    </a>
+
+    <!-- LINK DE SAÍDA: coloque aqui a página final, obrigado, ou recusa definitiva -->
+    <a class="decline" href="https://romancenet.site/up1/" data-preserve-params="true">
+      Não quero essa última oferta
+    </a>
+
+    <div class="security-note">Compra segura • Acesso imediato • Última chance nesta página</div>
+
+    <div class="security-image">
+      <img src="./img/n3.png" alt="Compra segura e garantia" width="650" height="254" loading="lazy" />
+    </div>
+  </main>
+
+  <script>
+    /*
+      Mantém UTMs e parâmetros da URL no checkout e no link de saída.
+      Exemplo: ?utm_source=email&origem=whatsapp
+    */
+    (function preserveUrlParams() {
+      const currentParams = new URLSearchParams(window.location.search);
+      if (!currentParams.toString()) return;
+
+      document.querySelectorAll('[data-preserve-params="true"]').forEach(function(link) {
+        try {
+          const url = new URL(link.href);
+          currentParams.forEach(function(value, key) {
+            if (!url.searchParams.has(key)) {
+              url.searchParams.set(key, value);
+            }
+          });
+          link.href = url.toString();
+        } catch (error) {}
+      });
+    })();
+  </script>
+
+  <!-- Select de parcelas escondido: upsell cobra 1x por padrão. -->
+  <select payt_element="installment" data-object="4ZNJ74-4MJJ7A" style="display:none"></select>
+
+  <!-- Script da Payt: cole UMA VEZ antes do fechamento do body. -->
+  <script type="text/javascript" src="https://checkout.payt.com.br/multiple-oneclickbuyscript/L9JGNR.js"></script>
+</body>
+</html>
