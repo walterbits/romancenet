@@ -274,6 +274,19 @@
       .decline {
         margin-top: 26px;
       }
+      .checkout-price {
+  margin: 0 auto 16px;
+  color: #ffffff;
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.1;
+  font-weight: 900;
+  text-align: center;
+}
+
+.checkout-price strong {
+  color: var(--green);
+  text-shadow: 0 0 18px rgba(57, 255, 86, 0.24);
+}
     }
   </style>
 </head>
@@ -308,14 +321,17 @@
     </p>
 
     <!-- BOTÃO PAYT ONE CLICK: objeto 4ZNJ74-4MJJ7A -->
+
+    <span class="old-price">R$29</span>
+<span class="new-price">apenas R$19!</span>
     <a class="cta" href="#" payt_action="oneclick_buy" data-object="4ZNJ74-4MJJ7A">
       Acessar o Robô por R$19 agora!
     </a>
 
     <!-- LINK DE SAÍDA: coloque aqui a página final, obrigado, ou recusa definitiva -->
-    <a class="decline" href="https://romancenet.site/up1/" data-preserve-params="true">
-      Não quero essa última oferta
-    </a>
+<a class="decline"  href="?refused=1" data-preserve-params="true">
+  Não quero essa última oferta
+</a>
 
     <div class="security-note">Compra segura • Acesso imediato • Última chance nesta página</div>
 
