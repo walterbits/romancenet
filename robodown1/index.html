@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Robô Sedutor | Oferta Especial</title>
-  <meta name="description" content="Oferta especial de downsell do Robô Sedutor por apenas R$29." />
+  <meta name="description" content="Oferta especial de downsell do Robô Sedutor por apenas R$47." />
 
   <style>
     :root {
@@ -252,6 +252,34 @@
       .security {
         margin-top: 42px;
       }
+      .checkout-area {
+  width: min(100%, 1120px);
+  margin: 0 auto;
+}
+
+.checkout-price {
+  margin: 0 auto 14px;
+  color: #ffffff;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 900;
+}
+
+.checkout-price strong {
+  color: var(--green);
+}
+
+.installment-select {
+  display: block;
+  width: min(100%, 420px);
+  min-height: 48px;
+  margin: 0 auto 20px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 16px;
+}
     }
   </style>
 </head>
@@ -284,16 +312,23 @@
       <span class="green">EXATAMENTE</span> o que dizer. Não em uma semana, não em um mês.
       Agora! E por menos do que você gasta num almoço.
     </p>
-
+De <span class="old-price">R$67</span>
+por <span class="new-price">apenas R$47</span>
+        <select
+  payt_element="installment"
+  data-object="RKDP84-4MJJ7A">
+</select>
     <!-- BOTÃO PAYT DO DOWNSELL: troque o href abaixo pelo link do checkout Payt de R$47 -->
         <a class="cta" href="#" payt_action="oneclick_buy" data-object="RKDP84-4MJJ7A">
-            Obter acesso agora
+            Obter acesso agora 
+
         </a>
 
+
     <!-- LINK DE SAÍDA: coloque aqui a página final, obrigado, ou recusa definitiva -->
-    <a class="decline" href="https://romancenet.site/robodown2" data-preserve-params="true">
-      Prefiro ficar sozinho
-    </a>
+<a class="decline" href="?refused=1">
+  Prefiro ficar sozinho
+</a>
 
     <div class="security">
       <img src="./img/n3.png" alt="Robô Sedutor analisando conversa e sugerindo resposta" width="586" height="916" loading="eager" />
