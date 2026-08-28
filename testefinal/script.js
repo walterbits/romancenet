@@ -1,0 +1,577 @@
+/* =========================================================
+   CONFIGURAÇÃO DO PORTFÓLIO
+   ========================================================= */
+
+const WHATSAPP_NUMBER = '5531971687019';
+const WHATSAPP_MESSAGE = 'Olá! Vi seu portfólio e gostaria de falar sobre um criativo.';
+const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+document.querySelectorAll('[data-whatsapp]').forEach(a => a.href = waUrl);
+
+const portfolioVideos = [
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949685/sample-01.mp4', poster:'thumbnails/gallery-1.jpg', title:'UGC IA 01', subtitle:'Hook + retenção' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949684/sample-02.mp4', poster:'thumbnails/gallery-2.jpg', title:'UGC IA 02', subtitle:'Direct Response' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949691/sample-03.mp4', poster:'thumbnails/gallery-3.jpg', title:'UGC IA 03', subtitle:'Oferta + retenção' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949687/sample-04.mp4', poster:'thumbnails/gallery-4.jpg', title:'UGC IA 04', subtitle:'Hook + prova' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949684/sample-05.mp4', poster:'thumbnails/gallery-5.jpg', title:'UGC IA 05', subtitle:'Ad performance' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949685/sample-06.mp4', poster:'thumbnails/gallery-6.jpg', title:'UGC IA 06', subtitle:'Creative testing' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949684/sample-07.mp4', poster:'thumbnails/gallery-7.jpg', title:'UGC IA 07', subtitle:'UGC + storytelling' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949685/sample-06.mp4', poster:'thumbnails/gallery-8.jpg', title:'UGC IA 08', subtitle:'Oferta direta' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949685/sample-06.mp4', poster:'thumbnails/gallery-9.jpg', title:'UGC IA 09', subtitle:'Social proof' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949686/sample-10.mp4', poster:'thumbnails/gallery-10.jpg', title:'UGC IA 10', subtitle:'Variação de hook' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949686/sample-11.mp4', poster:'thumbnails/gallery-11.jpg', title:'UGC IA 11', subtitle:'Performance' },
+  { type:'mp4', src:'https://res.cloudinary.com/uubmrjld/video/upload/v1787949689/sample-12.mp4', poster:'thumbnails/gallery-12.jpg', title:'UGC IA 12', subtitle:'Storytelling' }
+];
+
+const categoryConfig = {
+  ugc: { label:'UGC IA', subtitle:'UGC com IA', indexes:[0,1,2,3,4,5,6] },
+  cinematic: { label:'IA CINEMATOGRÁFICO', subtitle:'Storytelling visual', indexes:[7,8,9,10,11,0,1] },
+  reel: { label:'REEL VIRAL', subtitle:'Reel de performance', indexes:[2,4,6,8,10,1,3] },
+  hardcopy: { label:'HARD COPY', subtitle:'Criativo direto', indexes:[3,5,7,9,11,2,4] }
+};
+
+function escapeHtml(value='') {
+  return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+
+function createMediaElement(video) {
+  if (video.type === 'vturb') {
+    const wrap = document.createElement('div');
+    wrap.className = 'vturb-media';
+    wrap.dataset.vturbSrc = video.src;
+    if (video.poster) wrap.style.backgroundImage = `url("${video.poster}")`;
+    const iframe = document.createElement('iframe');
+    iframe.src = video.src;
+    iframe.title = video.title || 'Vídeo VTurb';
+    iframe.allow = 'autoplay; fullscreen';
+    iframe.allowFullscreen = true;
+    iframe.loading = 'lazy';
+    iframe.className = 'vturb-frame';
+    wrap.appendChild(iframe);
+    return wrap;
+  }
+  const el = document.createElement('video');
+  el.preload = 'metadata';
+  el.muted = true;
+  el.playsInline = true;
+  el.disablePictureInPicture = true;
+  el.setAttribute('disablePictureInPicture', '');
+  el.poster = video.poster || '';
+  el.src = video.src;
+  return el;
+}
+
+function card(video, label, index) {
+  const el = document.createElement('article');
+  el.className = `video-card media-${video.type}`;
+  el.dataset.type = video.type;
+  el.dataset.index = index;
+  const media = createMediaElement(video);
+  el.appendChild(media);
+  if (video.type === 'mp4') {
+    const play = document.createElement('button');
+    play.className = 'play';
+    play.type = 'button';
+    play.setAttribute('aria-label', 'Reproduzir vídeo');
+    play.textContent = '▶';
+    el.appendChild(play);
+    wireMp4(el, media, play);
+  } else {
+    el.classList.add('is-embedded');
+  }
+  const overlay = document.createElement('div');
+  overlay.className = 'card-overlay';
+  overlay.innerHTML = `<div class="card-cat"><span></span> ${escapeHtml(label)}</div><h3>${escapeHtml(video.title || 'Criativo')}</h3><p>${escapeHtml(video.subtitle || 'Criativo')}</p>`;
+  el.appendChild(overlay);
+  return el;
+}
+
+let userInteracted = false;
+window.addEventListener('pointerdown', () => { userInteracted = true; }, { once:false, passive:true });
+window.addEventListener('keydown', () => { userInteracted = true; }, { once:false });
+window.addEventListener('touchstart', () => { userInteracted = true; }, { once:false, passive:true });
+
+/* =========================================================
+   CONTROLE GLOBAL DE ÁUDIO
+   ========================================================= */
+function pauseAllVideos() {
+  document.querySelectorAll('.video-card video').forEach(v => {
+    v.pause(); v.muted = true; v.currentTime = 0;
+  });
+  document.querySelectorAll('.video-card').forEach(c => {
+    c.classList.remove('is-playing');
+    const playBtn = c.querySelector('.play');
+    if (playBtn) playBtn.textContent = '▶';
+  });
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) pauseAllVideos();
+});
+document.addEventListener('mouseleave', () => { pauseAllVideos(); });
+
+/* =========================================================
+   MOBILE: AUTOPLAY COM INTERSECTION OBSERVER
+   ========================================================= */
+const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+function setupMobileAutoplay() {
+  if (!isTouchDevice) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const cardEl = entry.target;
+      const video = cardEl.querySelector('video');
+      if (!video) return;
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        document.querySelectorAll('.video-card video').forEach(v => {
+          if (v !== video) { v.pause(); v.muted = true; }
+        });
+        video.muted = false;
+        video.volume = 1;
+        video.play().catch(() => {
+          video.muted = true;
+          video.play().catch(() => {});
+        });
+      } else {
+        video.pause();
+        video.muted = true;
+        video.currentTime = 0;
+        cardEl.classList.remove('is-playing');
+        const playBtn = cardEl.querySelector('.play');
+        if (playBtn) playBtn.textContent = '▶';
+      }
+    });
+  }, { threshold: [0, 0.5, 1] });
+
+  document.querySelectorAll('.video-card.media-mp4').forEach(card => observer.observe(card));
+}
+
+function wireMp4(cardEl, video, play) {
+  play.addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    userInteracted = true;
+    if (video.paused) playVideo(cardEl, true); else video.pause();
+  });
+
+  video.addEventListener('click', e => {
+    e.stopPropagation();
+    userInteracted = true;
+    if (video.paused) playVideo(cardEl, true); else video.pause();
+  });
+
+  cardEl.addEventListener('mouseenter', () => {
+    if (isTouchDevice) return;
+    cardEl.dataset.hoverPlaying = 'true';
+    playVideo(cardEl, true);
+  });
+
+  cardEl.addEventListener('mouseleave', () => {
+    if (isTouchDevice) return;
+    cardEl.dataset.hoverPlaying = 'false';
+    video.pause(); video.muted = true; video.currentTime = 0;
+  });
+
+  video.addEventListener('play', () => {
+    cardEl.classList.add('is-playing');
+    play.textContent = 'Ⅱ';
+  });
+  video.addEventListener('pause', () => {
+    cardEl.classList.remove('is-playing');
+    play.textContent = '▶';
+  });
+  video.addEventListener('ended', () => {
+    cardEl.classList.remove('is-playing');
+    play.textContent = '▶';
+    video.currentTime = 0;
+  });
+}
+
+function playVideo(cardEl, preferAudio = false) {
+  document.querySelectorAll('.video-card video').forEach(v => {
+    if (v !== cardEl.querySelector('video')) { v.pause(); v.muted = true; }
+  });
+  const video = cardEl.querySelector('video');
+  if (!video) return;
+  video.muted = !preferAudio;
+  video.volume = 1;
+  const attempt = video.play();
+  if (attempt && typeof attempt.catch === 'function') {
+    attempt.catch(() => { video.muted = true; video.play().catch(() => {}); });
+  }
+}
+
+/* =========================================================
+   CARROSSEL — MOVIMENTO GARANTIDO
+   ========================================================= */
+
+const MOVEMENT_PRESETS = {
+  continuousRight: { type: 'continuous-right', speed: 90 },
+  continuousLeft: { type: 'continuous-left', speed: 24 },
+  every3Cards: { type: 'step', direction: 'right', cardsPerStep: 3, intervalMs: 4200, durationMs: 900 },
+  pingPong: { type: 'ping-pong', direction: 'right', cardsPerStep: 2, intervalMs: 2800, durationMs: 1100 },
+  pauseStep: { type: 'pause-step', direction: 'left', cardsPerStep: 1, intervalMs: 5000, durationMs: 750, pauseMs: 1800 },
+  fastSlow: { type: 'fast-slow', direction: 'right', speedMin: 10, speedMax: 48, cycleMs: 4200 },
+  randomStep: { type: 'random-step', direction: 'right', minCards: 1, maxCards: 3, intervalMs: 3000, durationMs: 850 },
+  wave: { type: 'wave', direction: 'left', speed: 34, waveMs: 5200 }
+};
+
+/* =========================================================
+   CONFIGURAÇÃO DOS CARROSSÉIS
+
+   DIREÇÃO: para mudar a direção de qualquer carrossel,
+   troque o preset entre continuousRight75 e continuousLeft75.
+
+   continuousRight75  = move para a DIREITA  (→)
+   continuousLeft75   = move para a ESQUERDA (←)
+
+   VELOCIDADE: para ajustar a velocidade, edite os presets
+   abaixo (altere o número depois de speed:).
+   ========================================================= */
+
+/* VELOCIDADE DOS CARROSSÉIS — edite aqui */
+const CAROUSEL_SPEED = 120;  // ← troque este número para mais rápido/lento
+
+const continuousRight = { type: 'continuous-right', speed: CAROUSEL_SPEED };
+const continuousLeft  = { type: 'continuous-left',  speed: CAROUSEL_SPEED };
+
+const CAROUSEL_MOVEMENTS = {
+  featured:  { ...MOVEMENT_PRESETS.continuousRight, pauseOnHover: false }, // 1º carrossel — não alterar
+
+  /* ↓↓↓ MUDE AQUI A DIREÇÃO DOS OUTROS CARROSSÉIS ↓↓↓ */
+  // 2º carrossel — troque continuousRight ↔ continuousLeft para mudar a direção
+  ugc:       continuousRight,
+  // 3º carrossel — troque continuousLeft ↔ continuousRight para mudar a direção  
+  cinematic: continuousLeft,
+  // 4º carrossel — troque continuousRight ↔ continuousLeft para mudar a direção
+  reel:      continuousRight,
+  // 5º carrossel — troque continuousLeft ↔ continuousRight para mudar a direção
+  hardcopy:  continuousLeft
+  /* ↑↑↑ MUDE AQUI A DIREÇÃO DOS OUTROS CARROSSÉIS ↑↑↑ */
+};
+
+function setupCarousel(shell, options = {}) {
+  const track = shell.querySelector('.carousel-track');
+  const prev = shell.querySelector('.prev');
+  const next = shell.querySelector('.next');
+  const infinite = options.infinite !== false;
+  const movement = options.movement || MOVEMENT_PRESETS.continuousRight;
+
+  let dragging = false;
+  let startX = 0;
+  let startScroll = 0;
+  let moved = false;
+  let loopWidth = 0;
+  let lastFrame = performance.now();
+  let animationFrame = null;
+  let movementTimer = null;
+  let pauseTimer = null;
+  let hoverPaused = false;
+  let direction = movement.direction === 'left' ? -1 : 1;
+  let pingDirection = direction;
+  let started = false;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const step = () => Math.max(track.clientWidth * 0.72, 260);
+
+  const measureLoop = () => {
+    if (!infinite) return;
+    const sw = track.scrollWidth;
+    if (sw > 0) loopWidth = sw / 3;
+  };
+
+  const normalizeLoop = () => {
+    if (!infinite || !loopWidth) return;
+    if (track.scrollLeft < loopWidth * 0.35) track.scrollLeft += loopWidth;
+    else if (track.scrollLeft > loopWidth * 1.65) track.scrollLeft -= loopWidth;
+  };
+
+  const moveBy = (amount, duration = 700) => {
+    if (dragging) return;
+    if (!infinite) { track.scrollBy({ left: amount, behavior: 'smooth' }); return; }
+    const start = track.scrollLeft;
+    const target = start + amount;
+    const startedAt = performance.now();
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    const animateStep = now => {
+      if (dragging || hoverPaused) return;
+      const t = clamp((now - startedAt) / duration, 0, 1);
+      track.scrollLeft = start + (target - start) * ease(t);
+      normalizeLoop();
+      if (t < 1) requestAnimationFrame(animateStep);
+    };
+    requestAnimationFrame(animateStep);
+  };
+
+  prev.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); moveBy(-step(), 550); });
+  next.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); moveBy(step(), 550); });
+
+  track.addEventListener('pointerdown', e => {
+    if (e.target.closest('button') || e.target.closest('iframe')) return;
+    dragging = true; moved = false; track.classList.add('dragging');
+    startX = e.clientX; startScroll = track.scrollLeft;
+    track.setPointerCapture?.(e.pointerId);
+  });
+  track.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) moved = true;
+    track.scrollLeft = startScroll - dx * 1.15;
+    normalizeLoop();
+  });
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false; track.classList.remove('dragging'); normalizeLoop();
+    if (moved) setTimeout(() => { moved = false; }, 50);
+  };
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+  window.addEventListener('pointerup', endDrag, { passive: true });
+
+  const bindHoverPauseToCards = () => {
+    if (options.pauseOnHover === false) return;
+    track.querySelectorAll('.video-card').forEach(cardEl => {
+      cardEl.addEventListener('mouseenter', () => { hoverPaused = true; });
+      cardEl.addEventListener('mouseleave', () => { hoverPaused = false; lastFrame = performance.now(); });
+    });
+  };
+
+  const canMove = () => !dragging && !hoverPaused && document.visibilityState === 'visible' && !document.hidden;
+
+  const runContinuous = (getSpeed) => {
+    let speed = getSpeed(performance.now());
+    const animate = now => {
+      if (canMove()) {
+        const dt = Math.min(now - lastFrame, 33); // cap em ~30fps equivalente
+        lastFrame = now;
+        track.scrollLeft += (speed / 1000) * dt;
+        normalizeLoop();
+      } else {
+        lastFrame = now; // evita dt enorme ao voltar
+      }
+      animationFrame = requestAnimationFrame(animate);
+    };
+    animationFrame = requestAnimationFrame(animate);
+  };
+
+  const runSteps = ({ cards, intervalMs, durationMs, dir = direction, pauseMs = 0 }) => {
+    const run = () => {
+      if (canMove()) moveBy(step() * cards * dir, durationMs);
+      if (pauseMs) {
+        pauseTimer = setTimeout(() => {
+          movementTimer = setTimeout(run, Math.max(0, intervalMs - pauseMs));
+        }, pauseMs);
+      } else {
+        movementTimer = setTimeout(run, intervalMs);
+      }
+    };
+    movementTimer = setTimeout(run, intervalMs);
+  };
+
+  const startMovement = () => {
+    if (started) return;
+    started = true;
+    lastFrame = performance.now();  // reset para evitar dt grande na 1ª frame
+    switch (movement.type) {
+      case 'continuous-right':
+        runContinuous(() => Math.max(1, movement.speed ?? 67));
+        break;
+      case 'continuous-left':
+        runContinuous(() => -Math.max(1, movement.speed ?? 24));
+        break;
+      case 'step':
+        runSteps({ cards: Math.max(1, movement.cardsPerStep ?? 1), intervalMs: Math.max(300, movement.intervalMs ?? 3500), durationMs: Math.max(150, movement.durationMs ?? 800), dir: movement.direction === 'left' ? -1 : 1 });
+        break;
+      case 'ping-pong':
+        runSteps({ cards: Math.max(1, movement.cardsPerStep ?? 1), intervalMs: Math.max(300, movement.intervalMs ?? 2800), durationMs: Math.max(150, movement.durationMs ?? 1000), dir: pingDirection });
+        setInterval(() => { if (!dragging) pingDirection *= -1; }, Math.max(300, movement.intervalMs ?? 2800));
+        break;
+      case 'pause-step':
+        runSteps({ cards: Math.max(1, movement.cardsPerStep ?? 1), intervalMs: Math.max(600, movement.intervalMs ?? 5000), durationMs: Math.max(150, movement.durationMs ?? 750), dir: movement.direction === 'left' ? -1 : 1, pauseMs: Math.max(0, movement.pauseMs ?? 1500) });
+        break;
+      case 'fast-slow':
+        runContinuous(now => {
+          const min = movement.speedMin ?? 10, max = movement.speedMax ?? 45;
+          const cycle = Math.max(1000, movement.cycleMs ?? 4000);
+          const wave = (Math.sin((now / cycle) * Math.PI * 2) + 1) / 2;
+          return (min + (max - min) * wave) * (movement.direction === 'left' ? -1 : 1);
+        });
+        break;
+      case 'random-step': {
+        const runRandom = () => {
+          if (canMove()) {
+            const min = Math.max(1, movement.minCards ?? 1);
+            const max = Math.max(min, movement.maxCards ?? 3);
+            const cards = Math.floor(Math.random() * (max - min + 1)) + min;
+            moveBy(step() * cards * (movement.direction === 'left' ? -1 : 1), movement.durationMs ?? 850);
+          }
+          movementTimer = setTimeout(runRandom, Math.max(500, movement.intervalMs ?? 3000));
+        };
+        movementTimer = setTimeout(runRandom, Math.max(500, movement.intervalMs ?? 3000));
+        break;
+      }
+      case 'wave':
+        runContinuous(now => {
+          const base = Math.max(1, movement.speed ?? 34);
+          const wave = 0.45 + 0.55 * ((Math.sin((now / Math.max(1000, movement.waveMs ?? 5200)) * Math.PI * 2) + 1) / 2);
+          return base * wave * (movement.direction === 'left' ? -1 : 1);
+        });
+        break;
+      default:
+        runContinuous(() => 67);
+    }
+  };
+
+  // Inicialização com múltiplos fallbacks
+  const initLoop = () => {
+    measureLoop();
+    if (infinite && loopWidth > 0) {
+      track.scrollLeft = loopWidth;
+    }
+    bindHoverPauseToCards();
+    startMovement();
+  };
+
+  // Tenta imediatamente
+  if (track.scrollWidth > 0) {
+    initLoop();
+  } else {
+    requestAnimationFrame(() => {
+      if (track.scrollWidth > 0) initLoop();
+      else setTimeout(initLoop, 200);
+    });
+  }
+
+  // Fallbacks agressivos para garantir movimento
+  setTimeout(() => { if (!started) initLoop(); }, 500);
+  setTimeout(() => { if (!started) initLoop(); }, 1200);
+
+  window.addEventListener('resize', () => {
+    if (!infinite) return;
+    requestAnimationFrame(() => {
+      const old = loopWidth;
+      measureLoop();
+      if (!old && loopWidth) track.scrollLeft = loopWidth;
+      normalizeLoop();
+    });
+  }, { passive: true });
+}
+
+function renderCarousel(shell, items, label, options = {}) {
+  const track = shell.querySelector('.carousel-track');
+  const repeated = [...items, ...items, ...items];
+  repeated.forEach((video, i) => track.appendChild(card(video, label, i % items.length)));
+  setupCarousel(shell, { ...options, infinite: true });
+}
+
+// =========================================================
+// RENDERIZAÇÃO DOS CARROSSÉIS
+// =========================================================
+
+const featuredShell = document.querySelector('[data-carousel="featured"]');
+renderCarousel(featuredShell, portfolioVideos.slice(0, 8), 'UGC IA', { movement: CAROUSEL_MOVEMENTS.featured });
+
+Object.entries(categoryConfig).forEach(([key, cfg]) => {
+  const category = document.querySelector(`[data-carousel="${key}"]`);
+  const shell = category.querySelector('.carousel-shell');
+  const items = cfg.indexes.map(i => ({ ...portfolioVideos[i], title: `${cfg.label} ${String(i + 1).padStart(2,'0')}` }));
+  renderCarousel(shell, items, cfg.label, { movement: CAROUSEL_MOVEMENTS[key] });
+});
+
+// Ativa autoplay mobile após renderização
+setTimeout(setupMobileAutoplay, 500);
+
+/* =========================================================
+   FAQ — ACCORDION
+   ========================================================= */
+(function initFAQ() {
+  const items = document.querySelectorAll('.faq-item');
+  if (!items.length) return;
+  items.forEach(item => {
+    const btn = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!btn || !answer) return;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      items.forEach(other => {
+        if (other !== item) {
+          other.classList.remove('is-open');
+          const ob = other.querySelector('.faq-question');
+          const oa = other.querySelector('.faq-answer');
+          if (ob) ob.setAttribute('aria-expanded', 'false');
+          if (oa) oa.style.maxHeight = '0px';
+        }
+      });
+      if (isOpen) {
+        item.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = '0px';
+      } else {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+})();
+
+/* =========================================================
+   STATS — ANIMAÇÃO DE CONTAGEM
+   ========================================================= */
+(function initStatsCounter() {
+  const statCards = document.querySelectorAll('.stat-orbit-card[data-count]');
+  if (!statCards.length) return;
+
+  const animateCount = (el, target, suffix, duration = 1800) => {
+    const start = performance.now();
+    const easeOutQuart = t => 1 - Math.pow(1 - t, 4);
+    const step = now => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = easeOutQuart(progress);
+      const current = Math.floor(target * eased);
+      if (suffix === '%') el.textContent = current + '%';
+      else if (suffix === 'h') el.textContent = current + 'h';
+      else el.textContent = '+' + current.toLocaleString('pt-BR');
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const resetNumber = (el) => {
+    let text = '+0';
+    if (el.dataset.suffix === '%') text = '0%';
+    else if (el.dataset.suffix === 'h') text = '0h';
+    el.textContent = text;
+  };
+
+  // Detecta sufixo uma vez no início
+  statCards.forEach(card => {
+    const el = card.querySelector('.stat-orbit-number');
+    if (!el) return;
+    let suffix = '';
+    if (el.textContent.includes('%')) suffix = '%';
+    else if (el.textContent.includes('h')) suffix = 'h';
+    el.dataset.suffix = suffix;
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const card = entry.target;
+      const el = card.querySelector('.stat-orbit-number');
+      const target = parseInt(card.dataset.count || '0', 10);
+      if (!el || isNaN(target)) return;
+
+      if (entry.isIntersecting) {
+        // Entrou na tela → anima
+        if (!el.dataset.animating) {
+          el.dataset.animating = 'true';
+          animateCount(el, target, el.dataset.suffix || '');
+        }
+      } else {
+        // Saiu da tela → reseta para poder animar de novo
+        el.dataset.animating = '';
+        resetNumber(el);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  statCards.forEach(card => observer.observe(card));
+})();
