@@ -1,0 +1,50 @@
+PORTFÓLIO DE EDITOR — VÍDEOS NO PRÓPRIO CARROSSEL
+
+IMPORTANTE
+Os vídeos agora abrem e reproduzem DENTRO DO PRÓPRIO CARD do carrossel.
+Não existe modal, janela lateral ou página separada para assistir.
+
+1) USAR MP4 LOCAL
+- Coloque o arquivo em: portfolio_editor/videos/
+- Coloque a capa em: portfolio_editor/thumbnails/
+- Abra script.js.
+- Procure portfolioVideos.
+- Adicione:
+
+  { type:'mp4', src:'videos/meu-video.mp4', poster:'thumbnails/minha-capa.jpg', title:'UGC IA 08', subtitle:'Meu criativo' }
+
+2) USAR VTURB
+- Hospede o vídeo no VTurb.
+- Pegue a URL de incorporação/player que o VTurb fornecer.
+- No portfolioVideos, adicione:
+
+  { type:'vturb', src:'URL_DO_PLAYER_VTURB', poster:'thumbnails/minha-capa.jpg', title:'UGC IA 09', subtitle:'VTurb' }
+
+O player VTurb será carregado dentro do próprio card 9:16.
+
+OBSERVAÇÃO SOBRE VTURB
+Dependendo do formato de embed fornecido pela sua conta/versão do VTurb, a URL pode ser uma URL de iframe ou uma URL específica de player. Use a URL de incorporação indicada pelo próprio VTurb.
+
+3) WHATSAPP
+No script.js altere:
+const WHATSAPP_NUMBER = '5500000000000';
+
+Use somente números, incluindo código do país e DDD.
+
+4) CARROSSEL
+- Arrastar com mouse.
+- Swipe no celular.
+- Setas esquerda/direita.
+- Autoplay do carrossel.
+- Ao passar o mouse, o movimento automático pausa.
+- MP4 reproduz com Play diretamente no card.
+- Apenas um MP4 pode tocar por vez.
+- VTurb permanece dentro do card e é controlado pelo próprio player.
+
+
+AUTOPLAY NO HOVER
+- Ao passar o mouse sobre um card MP4, o site tenta reproduzir automaticamente com áudio.
+- Se o navegador bloquear autoplay com áudio (política comum de Chrome/Safari/Firefox), o vídeo entra em reprodução silenciosa como fallback.
+- Depois de uma interação do usuário (clique/tecla), os navegadores tendem a permitir melhor a reprodução com áudio.
+- Ao retirar o mouse do card, o vídeo é pausado e volta ao início.
+- Em VTurb, o áudio no hover depende das permissões/API do próprio player incorporado; um iframe não pode ser controlado de forma genérica pelo código da página.
